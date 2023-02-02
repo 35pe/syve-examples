@@ -1,8 +1,5 @@
-Title: Offensive Language in the German speaking Twittersphere
-Date: 2019-12-16 10:20
-Category: How To
-Author: Team Hexis
-Slug: 8201183677
+
+# Offensive Language in the German speaking Twittersphere
 
 #### This is the first installment around the launch of [Hexis API](https://hexis.ai/en/index) and it is intended to show how &ndash; not hand-picked examples, but &ndash; real data looks through the lense of the classification system. We will use a few snippets of Python code to analyze the data and illustrate our findings.
 

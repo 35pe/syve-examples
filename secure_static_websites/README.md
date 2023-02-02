@@ -1,8 +1,5 @@
-Title: How to safeguard any input form
-Date: 2020-02-17 14:48
-Category: How To
-Author: Team Hexis
-Slug: 2326728642
+
+# How to safeguard any input form
 
 #### In this post we will demonstrate how to can safeguard any contact form or other kind of input form on your website. The following approach works as a drop-in solution for static sites and on webhosts with limited features. The only prerequisite is that you have write access to the site's HTML code.
 

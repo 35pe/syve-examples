@@ -1,8 +1,5 @@
-Title: How to safeguard Disqus comment sections
-Date: 2020-02-18 14:48
-Category: How To
-Author: Team Hexis
-Slug: 5353579881
+
+# How to safeguard Disqus comment sections
 
 #### This post demonstrates how to integrate Hexis API with the Disqus discussion system. You can automatically detect harmful messages, block them, and provide authors with an error message &ndash; all in a matter of milliseconds.
 
