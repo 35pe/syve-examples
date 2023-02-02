@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Guard any Input Form with Hexis API</title>
+    
+    <script>    
+      window.onload = function(){
+        var API_URL = 'https://api.hexis.ai/off/de/v1';
+        var API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxLCJleHBfIjoxNTg4NDA3NTk1LjI5MzIxMzh9.9ugPM9gIoez2FHjoLEdVXX10saLXMPnGLEZj5b2RZcw';
+        var FIELD_ID = 'user-message';  // id of text field
+        var FORM_ID = 'contact-form';  // id of form to be submitted
+        var THRESHOLD = 0.9;  // classification threshold
+        var STOP_MESSAGE = 'Please rephrase your comment. It looks like your comment is likely to be interpreted as rude or disrespectful.';
+        var ERROR_MESSAGE = 'An error has occured. Please try again.';
+
+        form = document.getElementById(FORM_ID)
+        form.addEventListener('submit', event => {
+          event.preventDefault();
+          var data = JSON.stringify({'text': document.getElementById(FIELD_ID).value});
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', API_URL, true);
+          xhr.setRequestHeader('Authorization', 'Bearer '+API_KEY);
+          xhr.onload = function () {
+            var res = JSON.parse(this.response);
+            if (res.scores != null) {
+              if (res.scores[0] > THRESHOLD) {
+                alert(STOP_MESSAGE);
+              } else {
+                form.submit();
+              }
+            } else {
+              alert(ERROR_MESSAGE);
+            }
+          };
+          xhr.send(data);
+        })
+      }
+    </script>
+  </head>
+
+  <body>
+    <form id="contact-form">
+      <label for="user-name">Name</label>
+      <input type="text" id="user-name" required/>
+      <label for="user-email">Email</label>
+      <input type="email" id="user-email" required/>
+      <label for="user-name">Message</label>
+      <input type="text" id="user-message" required/>
+      <input type="submit" value="Save"/>
+    </form>
+  </body>
+</html>

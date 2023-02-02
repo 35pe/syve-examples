@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .vega-actions a {
+        margin-right: 12px;
+        color: #757575;
+        font-weight: normal;
+        font-size: 13px;
+    }
+    .error {
+        color: red;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@3.4.0"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@4"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"width": 400, "height": 300}, "mark": {"tooltip": null}}, "layer": [{"data": {"url": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/NY-36-new-york-counties.json", "format": {"feature": "cb_2015_new_york_county_20m", "type": "topojson"}}, "mark": {"type": "geoshape", "fill": "lightgray", "fillOpacity": 1.0, "stroke": "white", "strokeWidth": 1}, "height": 500, "projection": {"type": "mercator"}, "width": 500}, {"data": {"name": "data-4535b6b21fe990b4fdba280f982c3693"}, "mark": "circle", "encoding": {"color": {"type": "quantitative", "field": "score"}, "latitude": {"field": "latitude", "type": "quantitative"}, "longitude": {"field": "longitude", "type": "quantitative"}, "size": {"type": "quantitative", "field": "score", "title": "score (mean)"}, "tooltip": [{"type": "nominal", "field": "near"}, {"type": "quantitative", "field": "score"}]}, "title": "Aggression in the German-speaking Twittersphere"}], "$schema": "https://vega.github.io/schema/vega-lite/v3.4.0.json", "datasets": {"data-4535b6b21fe990b4fdba280f982c3693": [{"Unnamed: 0.1": 6499.5, "score": 0.0762288918972481, "latitude": 42.65116739999954, "longitude": -73.75496799999998, "near": "Albany"}, {"Unnamed: 0.1": 9499.5, "score": 0.10362696398445405, "latitude": 40.65010379999935, "longitude": -73.94958230000178, "near": "Brooklyn"}, {"Unnamed: 0.1": 4499.5, "score": 0.10176616828935221, "latitude": 42.88671659999888, "longitude": -78.87839220000022, "near": "Buffalo"}, {"Unnamed: 0.1": 8499.5, "score": 0.10875819217553362, "latitude": 40.78962389999943, "longitude": -73.95989389999919, "near": "Manhattan"}, {"Unnamed: 0.1": 7499.5, "score": 0.1324481269689277, "latitude": 40.652492699999314, "longitude": -73.79142141581632, "near": "Queens"}, {"Unnamed: 0.1": 499.5, "score": 0.09091964080906473, "latitude": 43.157285000000584, "longitude": -77.61521400000001, "near": "Rochester"}, {"Unnamed: 0.1": 2499.5, "score": 0.07843729037721642, "latitude": 40.58345570000022, "longitude": -74.14960479999868, "near": "Staten Island"}, {"Unnamed: 0.1": 3499.5, "score": 0.08110070247505792, "latitude": 43.04812210000073, "longitude": -76.14742439999867, "near": "Syracuse"}, {"Unnamed: 0.1": 1499.5, "score": 0.11100524483178742, "latitude": 40.84665079999903, "longitude": -73.87859370000025, "near": "The Bronx"}, {"Unnamed: 0.1": 5499.5, "score": 0.07898976901499555, "latitude": 40.93120990000098, "longitude": -73.89874689999891, "near": "Yonkers"}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div class="error" style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

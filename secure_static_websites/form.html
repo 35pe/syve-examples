@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Guard any Input Form with Hexis API</title>
+    
+    <script>
+      window.onload = function(){
+        var PHP_URL = 'api.php';  // path to api.php
+        var FIELD_ID = 'user-message';  // id of input field
+        var FORM_ID = 'contact-form';  // id of input form
+        var THRESHOLD = 0.9;  // classification threshold
+        var STOP_MESSAGE = 'Please rephrase your comment. It looks like your comment is likely to be interpreted as rude or disrespectful.';
+        var ERROR_MESSAGE = 'An error has occured. Please try again.';
+
+        form = document.getElementById(FORM_ID)
+        form.addEventListener('submit', event => {
+          event.preventDefault();
+          var data = new FormData();
+          data.append('text', document.getElementById(FIELD_ID).value);
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', PHP_URL, true);
+          xhr.onload = function () {
+            var res = JSON.parse(this.response);
+            if (res.status && res.score != null) {
+              if (res.score > THRESHOLD) {
+                alert(STOP_MESSAGE);
+              } else {
+                form.submit();
+              }
+            } else {
+              alert(ERROR_MESSAGE);
+            }
+          };
+          xhr.send(data);
+        })
+      }
+    </script>
+  </head>
+
+  <body>
+    <form id="contact-form">
+      <label for="user-name">Name</label>
+      <input type="text" id="user-name" required/>
+      <label for="user-email">Email</label>
+      <input type="email" id="user-email" required/>
+      <label for="user-name">Message</label>
+      <input type="text" id="user-message" required/>
+      <input type="submit" value="Save"/>
+    </form>
+  </body>
+</html>
